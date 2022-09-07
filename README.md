@@ -18,9 +18,10 @@ etherCAT从站的相关配置说明请参考教程示例7-3。
 ## 程序组成与设计
 
 本演示包含如下主要组成软件：
-- 工具程序[capture_image.py](./Tools/capture_image.py)源码，其单独运行每100ms从摄像头采集一张图片，保存于磁盘目录/wa-plc/images下
+- 工具程序[/Tools/capture_image.py](./Tools/capture_image.py)源码，其单独运行每100ms从摄像头采集一张图片，保存于磁盘目录/wa-plc/images下
 - 集成了OPENVINO的PLC runtime (从厂家获取)
-- PLC应用源码，其编译打包后运行于OPENVINO PLC runtime之上
+- PLC应用源码，其编译打包后运行于OPENVINO PLC runtime之上. 应用的项目组织结构如下图：  
+![](./DOCS/imgs/project_view.png)
 
 ## 基本工作原理
 
@@ -31,7 +32,6 @@ etherCAT从站的相关配置说明请参考教程示例7-3。
 
 
 ## 图像采集与分类算法的模块封装
-
 ### 模块接口定义
 本项目包含一个内部模块`image_classify_api`，基于c/c++语言实现。模块定义了两个POU接口：
 - CAMERA：功能块，每次调用采集一幅图象，
