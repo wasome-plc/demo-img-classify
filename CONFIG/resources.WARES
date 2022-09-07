@@ -1,0 +1,27 @@
+[
+    {
+        "name": "_CONFIGURE_MANUAL_",
+        "resources": [
+            {
+                "tasks": [
+                    {
+                        "name": "task1",
+                        "priority": 1,
+                        "interval": 500,
+                        "row_index": 0
+                    }
+                ],
+                "programs": [
+                    {
+                        "seq": 1,
+                        "task": "task1",
+                        "type": "image_classify",
+                        "name": "task1",
+                        "row_index": 0
+                    }
+                ],
+                "name": "_RESOURCE_MANUAL_"
+            }
+        ]
+    }
+]

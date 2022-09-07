@@ -1,0 +1,51 @@
+{
+    "namespace": "image_classify_api",
+    "vendor": "WaSome Intelligence Technology",
+    "version": "0.0.1",
+    "category": "binary",
+    "language": "C/C++",
+    "debug": false,
+    "servo_drv": false,
+    "description": "Wrap native image classification APIs to PLC app",
+    "elements": {
+        "POUs": [
+            {
+                "name": "CLASSIFY",
+                "type": "FUNC",
+                "ret_type": "DINT",
+                "class": "",
+                "var_decls": [
+                    {
+                        "name": "img_handle",
+                        "type": "DINT",
+                        "keyword": "VAR_INPUT"
+                    },
+                    {
+                        "name": "model_id",
+                        "type": "DINT",
+                        "keyword": "VAR_INPUT"
+                    }
+                ]
+            },
+            {
+                "name": "CAMERA",
+                "type": "FB",
+                "ret_type": "",
+                "class": "C++",
+                "var_decls": [
+                    {
+                        "name": "img_chn",
+                        "type": "DINT",
+                        "keyword": "VAR_INPUT"
+                    },
+                    {
+                        "name": "image",
+                        "type": "DINT",
+                        "keyword": "VAR_OUTPUT"
+                    }
+                ]
+            }
+        ],
+        "datatypes": []
+    }
+}
