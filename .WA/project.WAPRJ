@@ -1,0 +1,9 @@
+{
+    "name": "image_classify",
+    "version": "0.0.1",
+    "description": "Demonstrate artificial intelligence capability",
+    "category": "application",
+    "template": "",
+    "vsc": true,
+    "lastOpenTime": 1654411315366
+}
