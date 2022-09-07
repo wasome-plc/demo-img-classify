@@ -10,8 +10,8 @@ PLC应用实时识别摄像头采集到的图像，根据图像分类识别结�
 
 - PLC主机上连接USB摄像头
 - PLC主机通过etherCAT连接以下从站设备：
-    - 汇川is620n伺服的从站地址为20
-    - 数字IO模块的从站地址为16
+    - 汇川is620n伺服，从站地址为20
+    - 成石创新ITEVGA ETHERCAT数字IO模块，从站地址为16。链接：http://tegva.cn/product/34.html
 
 etherCAT从站的相关配置说明请参考教程示例7-3。
 
