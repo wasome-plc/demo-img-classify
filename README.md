@@ -77,7 +77,7 @@ int
 plc_take_photo(int image_channel);
 ```
 ### 模块接口C头文件
-用户在模块接口编辑器中定义了接口后，通过IDE自动创建框架代码，其中头文件[wa_interface.h](./MODULES/image_classify_api/.MODULE/cpp/wa_interface.h)定义了用户需要实现的函数与C++类：
+用户在模块接口编辑器中定义了接口后，通过IDE自动创建框架代码，其中自动生成的头文件[wa_interface.h](./MODULES/image_classify_api/.MODULE/cpp/wa_interface.h)定义了用户需要实现的函数与C++类：
 
 ```
 int CLASSIFY(int img_handle, int model_id);
@@ -124,7 +124,7 @@ int CLASSIFY(int img_handle, int model_id) {
 
 ```
 
-功能块`CAMERA`在源程序[CAMERA.cpp](./MODULES/image_classify_api/implements/cpp/CAMERA.cpp)中实现：
+功能块`CAMERA`在源程序[CAMERA.cpp](./MODULES/image_classify_api/implements/cpp/CAMERA.cpp)中实现。源码中已经包含了自动生成的C++类的基本结构，用户只需要在有注释`/* USER CALL START */`的地方输入自己需要实现的逻辑。
 ```
 void __init_CAMERA(FBData *self) { self->fb_self = new CAMERA(); }
 
@@ -204,7 +204,7 @@ runtime支持通过配置文件来设定图象采集通道与所使用的人工�
 
 ## PLC主程序
 
-[main.st](./PROGRAM/main.st)
+PLC应用的主程序在ST源程序[main.st](./PROGRAM/main.st)中实现。
 
 ### 变量定义
 ```
@@ -282,7 +282,7 @@ runtime支持通过配置文件来设定图象采集通道与所使用的人工�
 ### 图像采集、分类识别与控制输出
 
 ```
-    g_do0 := g_do0 +1;
+    g_do0 := g_do0 +1;  // 产生在第一组DO指示灯闪烁的效果
      
     //IF NOT trigger THEN
     //    IF prev THEN
@@ -295,16 +295,22 @@ runtime支持通过配置文件来设定图象采集通道与所使用的人工�
         WA_LOG('The classification result is: [%s]', 'Pineapple');
     ELSIF classify_output = 954 THEN
         res := CATEGORY#Banana;
+
+        //第二组DO的第一个引脚输出
         g_do1 := 1;
         Reg_60ff_target_vel := 16#1000000 ;
         WA_LOG('The classification result is: [%s]', 'Banana');
     ELSIF classify_output = 950 THEN
         res := CATEGORY#Orange;
+
+        //第二组DO的第8个引脚输出
         g_do1 := 128;
         Reg_60ff_target_vel := 16#4000000 ;
         WA_LOG('The classification result is: [%s]', 'Orange');
     ELSE
         res := CATEGORY#Unknown;
+
+        //第二组DO的第所有8个引脚输出
         g_do1 := 255;
         Reg_60ff_target_vel := 16#0000000;
         WA_LOG('The classification result is: [%s], label: %d', 'Unknown', classify_output);
