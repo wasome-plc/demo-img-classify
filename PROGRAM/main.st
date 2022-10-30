@@ -32,15 +32,18 @@ PROGRAM image_classify
         img : DINT;
         prev : BOOL;
         cam : CAMERA;
+        last_classify_output : CATEGORY := CATEGORY#Unknown;
+        res : CATEGORY;
+        name : STRING;
     END_VAR
 
     VAR_OUTPUT
-        res AT %QD0 : CATEGORY;
+        //res2 AT %QD10 : DINT;
     END_VAR
 
     IF Last_6041_status <> Reg_6041_status THEN
-         WA_LOG('Reg_6041_status changed from %d (0X%X) to %d (0X%X),  act-pos=%d (0X%X)', 
-            Last_6041_status, Last_6041_status, Reg_6041_status, Reg_6041_status, Reg_6064_actual_pos, Reg_6064_actual_pos);
+         WA_LOG('Reg_6041_status changed from %d (0X%X) to %d (0X%X),  act-pos=%d (0X%X), servo_status=0X%X', 
+            Last_6041_status, Last_6041_status, Reg_6041_status, Reg_6041_status, Reg_6064_actual_pos, Reg_6064_actual_pos, servo_status);
             Last_6041_status := Reg_6041_status;
        
     END_IF;
@@ -48,6 +51,7 @@ PROGRAM image_classify
     Reg_60ff_target_vel := 0;
     Reg_6040_control_word := 0;
     Reg_60ff_target_vel := 16#1000000 ;
+    name := 'unknown';
 
     IF Reg_6041_status = 16#218 THEN
         Reg_6040_control_word := 16#0080;
@@ -80,34 +84,38 @@ PROGRAM image_classify
 
     g_do0 := g_do0 +1;
      
-    //IF NOT trigger THEN
-    //    IF prev THEN
+
     cam(img_chn := 0);
     img := cam.image;
     classify_output := CLASSIFY(img_handle := img, model_id := 0);
 
     IF classify_output = 953 THEN
         res := CATEGORY#Pineapple;
-        WA_LOG('The classification result is: [%s]', 'Pineapple');
+        name := 'Pineapple';
     ELSIF classify_output = 954 THEN
         res := CATEGORY#Banana;
         g_do1 := 1;
         Reg_60ff_target_vel := 16#1000000 ;
-        WA_LOG('The classification result is: [%s]', 'Banana');
+        name := 'Banana';
     ELSIF classify_output = 950 THEN
         res := CATEGORY#Orange;
         g_do1 := 128;
         Reg_60ff_target_vel := 16#4000000 ;
-        WA_LOG('The classification result is: [%s]', 'Orange');
+        name := 'Orange';
     ELSE
         res := CATEGORY#Unknown;
         g_do1 := 255;
-        Reg_60ff_target_vel := 16#0000000;
-        WA_LOG('The classification result is: [%s], label: %d', 'Unknown', classify_output);
+        Reg_60ff_target_vel := 16#100000;
+        name := 'Unknown';
     END_IF;
 
-        //END_IF;
-   // END_IF;
+   IF last_classify_output <> res THEN
+       WA_LOG('The classification result is: [%s]', name);
+   END_IF;
+   
+
+    last_classify_output := res;
+
 
     prev := trigger;
 
