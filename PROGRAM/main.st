@@ -82,7 +82,7 @@ PROGRAM image_classify
         
     END_IF;
 
-    g_do0 := g_do0 +1;
+    (* g_do0 := g_do0 +1; *)
      
 
     cam(img_chn := 0);
@@ -94,17 +94,17 @@ PROGRAM image_classify
         name := 'Pineapple';
     ELSIF classify_output = 954 THEN
         res := CATEGORY#Banana;
-        g_do1 := 1;
+        (* g_do1 := 1; *)
         Reg_60ff_target_vel := 16#1000000 ;
         name := 'Banana';
     ELSIF classify_output = 950 THEN
         res := CATEGORY#Orange;
-        g_do1 := 128;
+        (* g_do1 := 128; *)
         Reg_60ff_target_vel := 16#4000000 ;
         name := 'Orange';
     ELSE
         res := CATEGORY#Unknown;
-        g_do1 := 255;
+        (* g_do1 := 255; *)
         Reg_60ff_target_vel := 16#100000;
         name := 'Unknown';
     END_IF;

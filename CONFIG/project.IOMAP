@@ -1,100 +1,73 @@
 {
-    "input": [
-        {
-            "access": "redis://127.0.0.1:6379/IX0.0",
-            "location": 0,
-            "name": "image_classify::trigger",
-            "num": 1,
-            "type": "BOOL",
-            "bit": 0,
-            "row_index": 0,
-            "prot": "redis"
-        },
-        {
-            "location": 1000,
-            "type": "INT",
-            "num": 1,
-            "prot": "ethcat",
-            "access": "shm2://[ethercat]:5566/rg?master=0&slave=20&entry_index=24641&entry_subindex=0",
-            "row_index": 1
-        },
-        {
-            "location": 1002,
-            "type": "DINT",
-            "num": 1,
-            "prot": "ethcat",
-            "access": "shm2://[ethercat]:5566/rg?master=0&slave=20&entry_index=24676&entry_subindex=0",
-            "row_index": 2
-        },
-        {
-            "location": null,
-            "type": "DINT",
-            "prot": "ethcat2",
-            "access": "shm2://[ethercat]:5566/rg2?master=0&slave=20&regname=Slave_State",
-            "row_index": 3,
-            "global_name": "servo_status",
-            "name": "servo_status"
-        }
-    ],
-    "output": [
-        {
-            "location": 1000,
-            "type": "INT",
-            "num": 1,
-            "prot": "ethcat",
-            "access": "shm2://[ethercat]:5566/rg?master=0&slave=20&entry_index=24640&entry_subindex=0",
-            "row_index": 0
-        },
-        {
-            "location": 1002,
-            "type": "DINT",
-            "num": 1,
-            "prot": "ethcat",
-            "access": "shm2://[ethercat]:5566/rg?master=0&slave=20&entry_index=24698&entry_subindex=0",
-            "row_index": 1
-        },
-        {
-            "location": 1006,
-            "type": "SINT",
-            "num": 1,
-            "prot": "ethcat",
-            "access": "shm2://[ethercat]:5566/rg?master=0&slave=20&entry_index=24672&entry_subindex=0",
-            "row_index": 2
-        },
-        {
-            "location": 1008,
-            "type": "DINT",
-            "num": 1,
-            "prot": "ethcat",
-            "access": "shm2://[ethercat]:5566/rg?master=0&slave=20&entry_index=24831&entry_subindex=0",
-            "row_index": 3
-        },
-        {
-            "location": null,
-            "type": "SINT",
-            "prot": "ethcat2",
-            "access": "shm2://[ethercat]:5566/rg2?master=0&slave=16&regname=Output[1]",
-            "row_index": 4,
-            "global_name": "g_do1",
-            "name": "g_do1"
-        },
-        {
-            "location": null,
-            "type": "SINT",
-            "prot": "ethcat2",
-            "access": "shm2://[ethercat]:5566/rg2?master=0&slave=16&regname=Output[0]",
-            "row_index": 5,
-            "global_name": "g_do0",
-            "name": "g_do0"
-        },
-        {
-            "access": "coap://127.0.0.1:5683/mb/bus-1/1/86?fc=0&items=1",
-            "location": 10,
-            "name": "image_classify::res2",
-            "num": 1,
-            "type": "DINT",
-            "row_index": 6,
-            "prot": "modbus"
-        }
-    ]
+    "io_editor": {
+        "input": [
+            {
+                "access": "redis://127.0.0.1:6379/IX0",
+                "location": 0,
+                "num": 1,
+                "type": "BOOL",
+                "bit": 0,
+                "row_index": 0,
+                "prot": "redis"
+            },
+            {
+                "access": "shm2://[ethercat]:5566/rg?master=0&slave=20&entry_index=24641&entry_subindex=0",
+                "location": 1000,
+                "num": 1,
+                "type": "WORD",
+                "row_index": 1,
+                "prot": "ethcat"
+            },
+            {
+                "access": "shm2://[ethercat]:5566/rg?master=0&slave=20&entry_index=24676&entry_subindex=0",
+                "location": 1002,
+                "num": 1,
+                "type": "DWORD",
+                "row_index": 2,
+                "prot": "ethcat"
+            }
+        ],
+        "output": [
+            {
+                "access": "shm2://[ethercat]:5566/rg?master=0&slave=20&entry_index=24640&entry_subindex=0",
+                "location": 1000,
+                "num": 1,
+                "type": "WORD",
+                "row_index": 0,
+                "prot": "ethcat"
+            },
+            {
+                "access": "shm2://[ethercat]:5566/rg?master=0&slave=20&entry_index=24698&entry_subindex=0",
+                "location": 1002,
+                "num": 1,
+                "type": "DWORD",
+                "row_index": 1,
+                "prot": "ethcat"
+            },
+            {
+                "access": "shm2://[ethercat]:5566/rg?master=0&slave=20&entry_index=24672&entry_subindex=0",
+                "location": 1006,
+                "num": 1,
+                "type": "BYTE",
+                "row_index": 2,
+                "prot": "ethcat"
+            },
+            {
+                "access": "shm2://[ethercat]:5566/rg?master=0&slave=20&entry_index=24831&entry_subindex=0",
+                "location": 1008,
+                "num": 1,
+                "type": "DWORD",
+                "row_index": 3,
+                "prot": "ethcat"
+            },
+            {
+                "access": "redis://127.0.0.1:6379/QD0",
+                "location": 0,
+                "num": 1,
+                "type": "DWORD",
+                "row_index": 4,
+                "prot": "redis"
+            }
+        ]
+    }
 }
